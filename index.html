@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caleb International School Project Hub</title>
+  <style>
+    /* Theme Colors */
+    :root {
+      --wine: #8B0000;
+      --light-wine: #B22222;
+      --gold: #FFD700;
+      --black: #000000;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--white);
+      color: var(--wine);
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .visible {
+      display: flex;
+    }
+
+    .logo-placeholder {
+      width: 120px;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .logo-placeholder img {
+      width: 100%;
+      display: block;
+    }
+
+    .line {
+      width: 120px;
+      height: 4px;
+      background: var(--gold);
+      margin: 10px 0;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .header {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 10px 0;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .subtext {
+      font-size: 16px;
+      color: var(--light-wine);
+      animation: fadeIn 1.3s ease-in-out;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 20px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #f5f6f7;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      background: var(--black);
+      color: var(--white);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .video-layout {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 20px;
+    }
+
+    .video-main {
+      width: 100%;
+      aspect-ratio: 16/9;
+      margin-bottom: 20px;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sidebar video {
+      width: 48%;
+      aspect-ratio: 16/9;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .sign-out-button {
+      margin-top: 30px;
+      background: var(--black);
+      color: var(--white);
+      padding: 14px;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 10px;
+      font-size: 14px;
+      text-align: center;
+      color: var(--black);
+      border-top: 1px solid #ccc;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideIn {
+      from {width: 0;}
+      to {width: 120px;}
+    }
+
+    /* Responsive Layout for Larger Screens */
+    @media(min-width: 768px) {
+      .video-layout {
+        flex-direction: row;
+      }
+
+      .video-main {
+        flex: 2;
+        margin-right: 10px;
+      }
+
+      .sidebar {
+        flex: 1;
+        flex-direction: column;
+      }
+
+      .sidebar video {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login / Welcome Screen -->
+  <section class="screen visible" id="welcomeScreen">
+    <div class="logo-placeholder">
+      <img src="logo.png" alt="CIS Logo">
+    </div>
+    <div class="line"></div>
+    <h1 class="header">Caleb International School Magodo</h1>
+    <p>Welcome to Year 5 Project Hub</p>
+    <p class="subtext">Please fill in the form below to begin</p>
+
+    <div class="form-container">
+      <input type="text" id="studentName" placeholder="Name" />
+      <input type="text" id="studentClass" placeholder="Class" />
+      <button onclick="login()">Login</button>
+    </div>
+
+    <footer>&copy; 2025 Caleb International School Magodo | All Rights Reserved</footer>
+  </section>
+
+  <!-- Video Display Screen -->
+  <section class="screen" id="videoScreen">
+    <div class="logo-placeholder">
+      <img src="logo.png" alt="CIS Logo">
+    </div>
+    <div class="line"></div>
+    <h2 class="header" id="greeting">Welcome</h2>
+    <p>Caleb International School | Student Project Hub</p>
+
+    <div class="video-layout">
+      <div class="video-main">
+        <video controls>
+          <source src="Year6new.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="sidebar">
+        <video controls>
+          <source src="Other.mp4" type="video/mp4" />
+        </video>
+        <video controls>
+          <source src="Year6new.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+    <!-- Sign Out Button placed under videos but above footer -->
+    <button class="sign-out-button" onclick="signOut()">Sign Out</button>
+
+    <footer>&copy; 2025 Caleb International School Magodo | All Rights Reserved</footer>
+  </section>
+
+  <script>
+    function login() {
+      const name = document.getElementById('studentName').value.trim();
+      const className = document.getElementById('studentClass').value.trim();
+
+      if (!name || !className) {
+        alert("Please enter both your name and class.");
+        return;
+      }
+
+      document.getElementById('greeting').textContent = `Welcome, ${name}`;
+      document.getElementById('welcomeScreen').classList.remove('visible');
+      document.getElementById('videoScreen').classList.add('visible');
+    }
+
+    function signOut() {
+      document.getElementById('videoScreen').classList.remove('visible');
+      document.getElementById('welcomeScreen').classList.add('visible');
+      document.getElementById('studentName').value = '';
+      document.getElementById('studentClass').value = '';
+    }
+  </script>
+</body>
+</html>
